@@ -2,34 +2,41 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import WindTransition from './WindTransition';
 
-export default function Contact() {
+const Contact = () => {
   return (
-    <section id="contact" className="relative bg-gradient-to-b from-white via-sky-50 to-white py-24">
-      <WindTransition sectionKey="contact">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="mb-10 text-center">
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-800">Contact</h2>
-            <p className="mt-2 text-slate-600">Reach out — this page opens with a subtle wind burst.</p>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, filter: 'blur(6px)' }}
-            whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-3xl bg-white/70 p-8 shadow-2xl shadow-sky-100/70 backdrop-blur-md"
-          >
-            <form className="grid gap-6 md:grid-cols-2" onSubmit={(e) => e.preventDefault()}>
-              <input className="rounded-xl border border-slate-200/60 bg-white/70 px-4 py-3 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-100" placeholder="Name" />
-              <input className="rounded-xl border border-slate-200/60 bg-white/70 px-4 py-3 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100" placeholder="Email" />
-              <textarea rows="5" className="md:col-span-2 rounded-xl border border-slate-200/60 bg-white/70 px-4 py-3 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-100" placeholder="Message" />
-              <div className="md:col-span-2 flex items-center justify-end">
-                <button className="rounded-full bg-gradient-to-r from-sky-500 to-cyan-500 px-6 py-3 text-white shadow-lg shadow-sky-500/30 transition hover:shadow-sky-500/50">Send</button>
-              </div>
-            </form>
-          </motion.div>
+    <WindTransition>
+      <div id="contact" className="mx-auto max-w-4xl px-6 py-20">
+        <div className="mb-8">
+          <h2 className="text-3xl md:text-4xl font-semibold text-sky-950 dark:text-white">Contact</h2>
+          <p className="mt-2 text-sky-800/70 dark:text-white/70">We’ll get back with a gentle tailwind.</p>
         </div>
-      </WindTransition>
-    </section>
+        <motion.form
+          initial={{ opacity: 0, scale: 0.98, filter: 'blur(6px)' }}
+          whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          onSubmit={(e) => e.preventDefault()}
+          className="grid gap-4 rounded-2xl bg-white/70 p-6 shadow-xl ring-1 ring-black/5 backdrop-blur-md dark:bg-white/5"
+        >
+          <label className="grid gap-2">
+            <span className="text-sm text-sky-900/80 dark:text-white/70">Name</span>
+            <input className="rounded-xl border border-white/20 bg-white/60 px-4 py-3 outline-none backdrop-blur placeholder-sky-800/60 focus:ring-2 focus:ring-sky-400 dark:bg-white/10 dark:placeholder-white/50" placeholder="Your name" />
+          </label>
+          <label className="grid gap-2">
+            <span className="text-sm text-sky-900/80 dark:text-white/70">Email</span>
+            <input type="email" className="rounded-xl border border-white/20 bg-white/60 px-4 py-3 outline-none backdrop-blur placeholder-sky-800/60 focus:ring-2 focus:ring-sky-400 dark:bg-white/10 dark:placeholder-white/50" placeholder="you@example.com" />
+          </label>
+          <label className="grid gap-2">
+            <span className="text-sm text-sky-900/80 dark:text-white/70">Message</span>
+            <textarea rows={5} className="rounded-xl border border-white/20 bg-white/60 px-4 py-3 outline-none backdrop-blur placeholder-sky-800/60 focus:ring-2 focus:ring-sky-400 dark:bg-white/10 dark:placeholder-white/50" placeholder="Tell us a little about your trip" />
+          </label>
+          <div className="flex justify-end">
+            <button className="rounded-full bg-gradient-to-r from-orange-500 to-amber-400 px-6 py-3 text-black font-medium shadow-lg shadow-orange-500/20">Send</button>
+          </div>
+        </motion.form>
+      </div>
+    </WindTransition>
   );
-}
+};
+
+export default Contact;

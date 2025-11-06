@@ -3,49 +3,49 @@ import { motion } from 'framer-motion';
 import WindTransition from './WindTransition';
 
 const destinations = [
-  { id: 1, name: 'Santorini, Greece', img: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=1400&auto=format&fit=crop' },
-  { id: 2, name: 'Kyoto, Japan', img: 'https://images.unsplash.com/photo-1544986581-efac024faf62?q=80&w=1400&auto=format&fit=crop' },
-  { id: 3, name: 'Banff, Canada', img: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1400&auto=format&fit=crop' },
-  { id: 4, name: 'Amalfi Coast, Italy', img: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop' }
+  { title: 'Santorini, Greece', img: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1200&q=60' },
+  { title: 'Kyoto, Japan', img: 'https://images.unsplash.com/photo-1505852679233-d9fd70aff56d?auto=format&fit=crop&w=1200&q=60' },
+  { title: 'Reykjavík, Iceland', img: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=60' },
+  { title: 'Banff, Canada', img: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=1200&q=60' },
 ];
 
-export default function Destinations() {
+const Destinations = () => {
   return (
-    <section id="destinations" className="relative bg-gradient-to-b from-sky-50 via-white to-sky-50 py-24">
-      <WindTransition sectionKey="destinations">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-10 flex items-end justify-between">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-800">Destinations</h2>
-              <p className="mt-2 text-slate-600">Each place glides into view as if carried by a gentle breeze.</p>
-            </div>
-            <div className="hidden md:block text-right text-slate-500">Scroll for more</div>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {destinations.map((d, idx) => (
-              <motion.article
-                key={d.id}
-                initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
-                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.7, delay: idx * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative overflow-hidden rounded-2xl bg-white/70 shadow-xl shadow-sky-100/60 backdrop-blur-md"
-              >
-                <div className="relative h-56 w-full overflow-hidden">
-                  <img src={d.img} alt={d.name} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  {/* wind-like diagonal overlay */}
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-sky-200/0 via-white/0 to-sky-300/20" />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold text-slate-800">{d.name}</h3>
-                  <p className="mt-1 text-sm text-slate-600">Curated experiences that feel effortless.</p>
-                </div>
-              </motion.article>
-            ))}
-          </div>
+    <WindTransition>
+      <div id="destinations" className="mx-auto max-w-6xl px-6 py-20">
+        <div className="mb-8">
+          <h2 className="text-3xl md:text-4xl font-semibold text-sky-950 dark:text-white">Featured Destinations</h2>
+          <p className="mt-2 text-sky-800/70 dark:text-white/70">Handpicked places that feel like a breath of fresh air.</p>
         </div>
-      </WindTransition>
-    </section>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {destinations.map((d, i) => (
+            <motion.article
+              key={d.title}
+              initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: i * 0.08 }}
+              className="group relative overflow-hidden rounded-2xl bg-white/70 ring-1 ring-black/5 shadow-lg dark:bg-white/5"
+            >
+              <img src={d.img} alt={d.title} className="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="p-4">
+                <h3 className="text-lg font-medium text-sky-950 dark:text-white">{d.title}</h3>
+              </div>
+              {/* Wind overlay */}
+              <div className="pointer-events-none absolute inset-0">
+                <div className="absolute inset-0 bg-gradient-to-t from-sky-950/20 to-transparent" />
+                <motion.div
+                  className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-gradient-to-tr from-cyan-300/20 to-transparent blur-3xl"
+                  animate={{ x: [0, -10, 6, 0] }}
+                  transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+                />
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </WindTransition>
   );
-}
+};
+
+export default Destinations;
